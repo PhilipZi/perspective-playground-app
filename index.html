@@ -23,8 +23,29 @@
             <label>rotateZ: {{rotateZ}}deg; </label>
             <input type="range" min="-180" max="180" v-model="rotateZ" />
 
-            <button type="button" @click.prevent="reset">Reset</button>
-            <button type="button" @click.prevent="copy">Copy</button>
+            <button
+              class="animate-button"
+              type="button"
+              @click.prevent="runResetMethods"
+              :disabled="resetIsDisabled"
+            >
+              <span v-if="resetIsLoading" class="loading">
+                <i class="fa fa-spinner fa-spin"></i> Loading...
+              </span>
+              <span v-else>{{ buttonTextReset }}</span>
+            </button>
+
+            <button
+              class="animate-button"
+              type="button"
+              @click.prevent="runCopyMethods"
+              :disabled="copyIsDisabled"
+            >
+              <span v-if="copyIsLoading" class="loading">
+                <i class="fa fa-spinner fa-spin"></i> Loading...
+              </span>
+              <span v-else>{{ buttonTextCopy }}</span>
+            </button>
           </div>
         </section>
         <section class="output">

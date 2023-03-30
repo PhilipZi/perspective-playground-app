@@ -5,6 +5,12 @@ let vm = Vue.createApp({
       rotateX: 0,
       rotateY: 0,
       rotateZ: 0,
+      resetIsLoading: false,
+      copyIsLoading: false,
+      resetIsDisabled: false,
+      copyIsDisabled: false,
+      buttonTextCopy: "Copy",
+      buttonTextReset: "Reset",
     };
   },
   computed: {
@@ -29,8 +35,31 @@ let vm = Vue.createApp({
     async copy() {
       let text = `transform:${this.box.transform};`;
       await navigator.clipboard.writeText(text);
-
-      alert("CSS Copied to Clipboard!");
+    },
+    onClickCopy() {
+      this.copyIsLoading = true;
+      this.copyIsDisabled = true;
+      setTimeout(() => {
+        this.copyIsLoading = false;
+        this.copyIsDisabled = false;
+        alert("CSS Copied to Clipboard!");
+      }, 2000); // Change the time to control how long the animation lasts
+    },
+    onClickReset() {
+      this.resetIsLoading = true;
+      this.resetIsDisabled = true;
+      setTimeout(() => {
+        this.resetIsLoading = false;
+        this.resetIsDisabled = false;
+      }, 2000); // Change the time to control how long the animation lasts
+    },
+    runCopyMethods() {
+      this.copy();
+      this.onClickCopy();
+    },
+    runResetMethods() {
+      this.reset();
+      this.onClickReset();
     },
   },
 }).mount("#app");
