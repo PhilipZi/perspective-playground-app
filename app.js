@@ -51,15 +51,16 @@ let vm = Vue.createApp({
       setTimeout(() => {
         this.resetIsLoading = false;
         this.resetIsDisabled = false;
+        this.reset();
       }, 2000); // Change the time to control how long the animation lasts
     },
     runCopyMethods() {
       this.copy();
       this.onClickCopy();
     },
-    runResetMethods() {
-      this.reset();
-      this.onClickReset();
-    },
+    // runResetMethods() {
+    //   this.reset();
+    //   this.onClickReset();
+    // },
   },
 }).mount("#app");
